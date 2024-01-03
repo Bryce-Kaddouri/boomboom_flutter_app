@@ -33,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     });
     animation = Tween<double>(begin: 100, end: 1).animate(_controller);
     _controller.forward();
-    _controller2 = AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    animation2 = Tween<double>(begin: 0.15, end: 20).animate(_controller2);
+    _controller2 = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    animation2 = Tween<double>(begin: 0, end: 1).animate(_controller2);
   }
 
   @override
@@ -136,25 +136,41 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       width: MediaQuery.of(context).size.width,
                       child: SvgPicture.asset(
                         'assets/svg/girl_splah.svg',
-                        allowDrawingOutsideViewBox: true,
                         fit: BoxFit.cover,
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        width: MediaQuery.of(context).size.width,
                       ),
                     ),
                     Spacer(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-                      child: Text(
-                        'Get ready for an incredible musical adventure!',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(0, 174, 239, 1),
+                    AnimatedBuilder(
+                      animation: animation2,
+                      builder: (context, child) {
+                        return Transform.translate(
+                          offset: Offset(0, 200 - animation2.value * 200),
+                          child: child,
+                        );
+                      },
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+                              child: const Text(
+                                'Get ready for an incredible musical adventure!',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(0, 174, 239, 1),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+                              child: AnimatedButtonWidget(),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-                      child: AnimatedButtonWidget(),
                     ),
                     SizedBox(
                       height: 50,
@@ -165,33 +181,46 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   alignment: Alignment.center,
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      AnimatedBuilder(
-                        animation: animation2,
-                        builder: (context, child) {
-                          return Transform.translate(
-                            offset: Offset(0, animation2.value),
-                            child: child,
-                          );
-                        },
-                        child: SvgPicture.asset(
-                          'assets/svg/bombom_logo.svg',
-                          allowDrawingOutsideViewBox: true,
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.contain,
-                        ),
+                  child: AnimatedBuilder(
+                    animation: animation2,
+                    builder: (context, child) {
+                      return Transform.translate(
+                        offset: Offset(0, animation2.value * MediaQuery.of(context).size.height * 0.15),
+                        child: child,
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svg/bombom_logo.svg',
+                            allowDrawingOutsideViewBox: true,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.contain,
+                          ),
+                          AnimatedBuilder(
+                            animation: animation2,
+                            builder: (context, child) {
+                              return Container(
+                                color: Colors.transparent,
+                                width: animation2.value * 170,
+                                child: Text(
+                                  'BoomBoom',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(0, 174, 239, 1),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      AnimatedBuilder(
-                        animation: animation2,
-                        builder: (context, child) {
-                          return Stack(
-                            children: [Text('BoomBoom')],
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ]),
