@@ -141,39 +141,40 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         width: MediaQuery.of(context).size.width,
                       ),
                     ),
-                    Spacer(),
-                    AnimatedBuilder(
-                      animation: animation2,
-                      builder: (context, child) {
-                        return Transform.translate(
-                          offset: Offset(0, 200 - animation2.value * 200),
-                          child: child,
-                        );
-                      },
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-                              child: const Text(
-                                'Get ready for an incredible musical adventure!',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(0, 174, 239, 1),
+                    Container(
+                      color: Colors.blue,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.width,
+                      child: AnimatedBuilder(
+                        animation: animation2,
+                        builder: (context, child) {
+                          return Transform.translate(
+                            offset: Offset(0, 200 - animation2.value * 120),
+                            child: child,
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+                                child: const Text(
+                                  'Get ready for an incredible musical adventure!',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(0, 174, 239, 1),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-                              child: AnimatedButtonWidget(),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 20),
+                                child: AnimatedButtonWidget(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 50,
                     ),
                   ],
                 ),
