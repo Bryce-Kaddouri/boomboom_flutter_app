@@ -2,6 +2,7 @@ import 'package:boomboom_flutter_app/src/core/color_helper.dart';
 import 'package:boomboom_flutter_app/src/feature/splash/presentation/widget/animated_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -131,14 +132,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 Column(
                   children: [
                     Container(
-                      color: Colors.red,
                       height: MediaQuery.of(context).size.height * 0.6,
                       width: MediaQuery.of(context).size.width,
                       child: SvgPicture.asset(
-                        'assets/svg/girl_splah.svg',
-                        fit: BoxFit.cover,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        width: MediaQuery.of(context).size.width,
+                        'assets/svg/girl_splash.svg',
+                        fit: BoxFit.contain,
+                        allowDrawingOutsideViewBox: true,
+                        height: 50,
+                        width: 50,
                       ),
                     ),
                     Container(
@@ -169,7 +170,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 20),
-                                child: AnimatedButtonWidget(),
+                                child: AnimatedButtonWidget(
+                                  onTap: () {
+                                    Get.toNamed('/success-login');
+                                  },
+                                ),
                               ),
                             ],
                           ),

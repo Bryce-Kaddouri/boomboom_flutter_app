@@ -2,7 +2,8 @@ import 'package:boomboom_flutter_app/src/core/color_helper.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedButtonWidget extends StatefulWidget {
-  const AnimatedButtonWidget({super.key});
+  Function onTap;
+  AnimatedButtonWidget({super.key, required this.onTap});
 
   @override
   State<AnimatedButtonWidget> createState() => _AnimatedButtonWidgetState();
@@ -46,6 +47,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> with Single
       child: InkWell(
         onTap: () {
           print('tapped');
+          widget.onTap();
         },
         onHover: (value) {
           if (value) {
